@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Form\PropertyType;
 use App\Repository\PropertyRepository;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,18 +32,18 @@ class AdminPropertyController extends AbstractController
 
     }
 
+
     /**
-     * @Route("/admin/edit", name="admin.property.edit")
-     * @param Property $property
+     * @Route("/admin/{id}", name="admin.property.edit")
      * @return \Symfony\Component\HttpFoundation\Response
+     * @param Property $property
      */
-
     public function edit(){
-        return $this->render('admin/property/edit.html.twig');
+       $form=  $this->createForm(PropertyType::class);
+        return $this->render('admin/property/edit.html.twig',[
+            'form'=> $form->createView()
+        ]);
     }
-
-
-
 
 
 
